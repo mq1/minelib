@@ -44,7 +44,7 @@ class MinecraftServer:
         )
 
         response = requests.get(version["url"])
-        server = response.json()["downloads"]["server"]["url"]
+        server = response.json()["downloads"]["server"]
 
         response = requests.get(server["url"])
         open(
