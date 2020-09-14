@@ -22,8 +22,8 @@ from .vanilla import MinecraftServer
 class SpigotServer(MinecraftServer):
     def download(self, dir):
         response = requests.get(
-            "https://cdn.getbukkit.org/spigot/spigot-${self.vanilla_version}.jar"
+            f"https://cdn.getbukkit.org/spigot/spigot-{self.vanilla_version}.jar"
         )
-        open(os.path.join(dir, "spigot-${self.vanilla_version}.jar"), "wb").write(
+        open(os.path.join(dir, f"spigot-{self.vanilla_version}.jar"), "wb").write(
             response.content
         )

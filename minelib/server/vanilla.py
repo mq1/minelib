@@ -48,5 +48,5 @@ class MinecraftServer:
 
         response = requests.get(server["url"])
         open(
-            os.path.join(dir, "/minecraft_server.${self.vanilla_version}.jar"), "wb"
+            os.path.join(dir, f"/minecraft_server.{self.vanilla_version}.jar"), "wb"
         ).write(response.content)
