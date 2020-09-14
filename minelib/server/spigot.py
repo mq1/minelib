@@ -20,10 +20,10 @@ from .vanilla import MinecraftServer
 
 
 class SpigotServer(MinecraftServer):
-    def download(self, dir):
+    def download(self, basedir):
         response = requests.get(
             f"https://cdn.getbukkit.org/spigot/spigot-{self.vanilla_version}.jar"
         )
-        open(os.path.join(dir, f"spigot-{self.vanilla_version}.jar"), "wb").write(
+        open(os.path.join(basedir, f"spigot-{self.vanilla_version}.jar"), "wb").write(
             response.content
         )

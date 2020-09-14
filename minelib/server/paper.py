@@ -39,10 +39,10 @@ class PaperServer(MinecraftServer):
         )
         self.paper_version = response.json()["builds"]["latest"]
 
-    def download(self, dir):
+    def download(self, basedir):
         response = requests.get(
             f"https://papermc.io/api/v1/paper/{self.vanilla_version}/{self.paper_version}/download"
         )
-        open(os.path.join(dir, f"paper-{self.paper_version}.jar"), "wb").write(
+        open(os.path.join(basedir, f"paper-{self.paper_version}.jar"), "wb").write(
             response.content
         )

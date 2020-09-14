@@ -34,7 +34,7 @@ class MinecraftServer:
         )
         self.vanilla_version = response.json()["latest"][type]
 
-    def download(self, dir):
+    def download(self, basedir):
         response = requests.get(
             "https://launchermeta.mojang.com/mc/game/version_manifest.json"
         )
@@ -48,5 +48,5 @@ class MinecraftServer:
 
         response = requests.get(server["url"])
         open(
-            os.path.join(dir, f"/minecraft_server.{self.vanilla_version}.jar"), "wb"
+            os.path.join(basedir, f"/minecraft_server.{self.vanilla_version}.jar"), "wb"
         ).write(response.content)
