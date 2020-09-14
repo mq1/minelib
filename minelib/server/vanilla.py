@@ -40,7 +40,7 @@ class MinecraftServer:
         )
         version_list = response.json()["versions"]
         version = next(
-            lambda version: version["id"] == self.vanilla_version, version_list
+            filter(lambda version: version["id"] == self.vanilla_version, version_list)
         )
 
         response = requests.get(version["url"])
