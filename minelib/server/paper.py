@@ -16,7 +16,7 @@
 
 import os
 import requests
-from vanilla import MinecraftServer
+from .vanilla import MinecraftServer
 
 
 class PaperServer(MinecraftServer):
@@ -43,4 +43,6 @@ class PaperServer(MinecraftServer):
         response = requests.get(
             "https://papermc.io/api/v1/paper/${self.vanilla_version}/${self.paper_version}/download"
         )
-        open(os.path.join(dir, "paper-${self.paper_version}.jar"), "wb").write(response.content)
+        open(os.path.join(dir, "paper-${self.paper_version}.jar"), "wb").write(
+            response.content
+        )

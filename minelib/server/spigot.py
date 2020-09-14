@@ -16,7 +16,7 @@
 
 import os
 import requests
-from vanilla import MinecraftServer
+from .vanilla import MinecraftServer
 
 
 class SpigotServer(MinecraftServer):
@@ -24,4 +24,6 @@ class SpigotServer(MinecraftServer):
         response = requests.get(
             "https://cdn.getbukkit.org/spigot/spigot-${self.vanilla_version}.jar"
         )
-        open(os.path.join(dir, "spigot-${self.vanilla_version}.jar"), "wb").write(response.content)
+        open(os.path.join(dir, "spigot-${self.vanilla_version}.jar"), "wb").write(
+            response.content
+        )
