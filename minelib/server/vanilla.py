@@ -1,4 +1,4 @@
-# mclib/server is a collection of minecraft server utilities
+# minelib/server is a collection of minecraft server utilities
 # Copyright (C) 2020  Manuel Quarneti
 
 # This program is free software: you can redistribute it and/or modify

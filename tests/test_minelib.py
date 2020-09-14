@@ -1,4 +1,4 @@
-from mclib import __version__
+from minelib import __version__
 
 
 def test_version():

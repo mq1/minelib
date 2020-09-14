@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "mclib"
+name = "minelib"
 version = "0.1.0"
 description = "An _unofficial_ python library for Minecraft"
 authors = ["Manuel Quarneti <manuelquarneti@gmail.com>"]

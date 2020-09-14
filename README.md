@@ -1,4 +1,4 @@
-# mclib
+# minelib
 
 An _unofficial_ python library for Minecraft
 
