@@ -14,27 +14,13 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-import os
+from os import path
 import requests
+from . import server
 
 
-class MinecraftServer:
-    vanilla_version = ""
-
-    def __init__(self, vanilla_version="release"):
-        if vanilla_version == "release" or vanilla_version == "snapshot":
-            self.fetch_latest_vanilla_version(vanilla_version)
-        else:
-            self.vanilla_version = vanilla_version
-
-    # type can be "release" or "snapshot"
-    def fetch_latest_vanilla_version(self, type):
-        response = requests.get(
-            "https://launchermeta.mojang.com/mc/game/version_manifest.json"
-        )
-        self.vanilla_version = response.json()["latest"][type]
-
-    def download(self, basedir):
+class MinecraftServer(server.MinecraftServer):
+    def download(self):
         response = requests.get(
             "https://launchermeta.mojang.com/mc/game/version_manifest.json"
         )
@@ -48,5 +34,6 @@ class MinecraftServer:
 
         response = requests.get(server["url"])
         open(
-            os.path.join(basedir, f"/minecraft_server.{self.vanilla_version}.jar"), "wb"
+            path.join(self.directory, f"/minecraft_server.{self.vanilla_version}.jar"),
+            "wb",
         ).write(response.content)

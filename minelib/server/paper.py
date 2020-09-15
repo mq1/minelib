@@ -14,12 +14,12 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-import os
+from os import path
 import requests
-from .vanilla import MinecraftServer
+from . import server
 
 
-class PaperServer(MinecraftServer):
+class MinecraftServer(server.MinecraftServer):
     paper_version = ""
 
     def __init__(self, vanilla_version="release", paper_version="latest"):
@@ -43,6 +43,6 @@ class PaperServer(MinecraftServer):
         response = requests.get(
             f"https://papermc.io/api/v1/paper/{self.vanilla_version}/{self.paper_version}/download"
         )
-        open(os.path.join(basedir, f"paper-{self.paper_version}.jar"), "wb").write(
+        open(path.join(basedir, f"paper-{self.paper_version}.jar"), "wb").write(
             response.content
         )

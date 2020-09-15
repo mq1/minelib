@@ -14,16 +14,24 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-from os import path
 import requests
-from . import server
 
 
-class MinecraftServer(server.MinecraftServer):
-    def download(self, basedir):
+class MinecraftServer:
+    vanilla_version = ""
+    directory = ""
+
+    def __init__(self, directory, vanilla_version="release"):
+        if vanilla_version == "release" or vanilla_version == "snapshot":
+            self.fetch_latest_vanilla_version(vanilla_version)
+        else:
+            self.vanilla_version = vanilla_version
+
+        self.directory = directory
+
+    # type can be "release" or "snapshot"
+    def fetch_latest_vanilla_version(self, type):
         response = requests.get(
-            f"https://cdn.getbukkit.org/spigot/spigot-{self.vanilla_version}.jar"
+            "https://launchermeta.mojang.com/mc/game/version_manifest.json"
         )
-        open(path.join(basedir, f"spigot-{self.vanilla_version}.jar"), "wb").write(
-            response.content
-        )
+        self.vanilla_version = response.json()["latest"][type]
