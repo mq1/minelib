@@ -26,6 +26,6 @@ class MinecraftServer(server.MinecraftServer):
             f"https://cdn.getbukkit.org/spigot/spigot-{self.vanilla_version}.jar"
         )
         content_disposition = response.headers["content-disposition"]
-        filename = next(re.findall("filename=(.+)", content_disposition))
+        filename = re.findall("filename=(.+)", content_disposition)[0]
 
         open(path.join(basedir, filename), "wb").write(response.content)

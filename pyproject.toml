@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "minelib"
-version = "0.1.7"
+version = "0.1.8"
 description = "An unofficial python library for Minecraft"
 authors = ["Manuel Quarneti <manuelquarneti@gmail.com>"]
 

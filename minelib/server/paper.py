@@ -26,6 +26,6 @@ class MinecraftServer(server.MinecraftServer):
             f"https://papermc.io/api/v1/paper/{self.vanilla_version}/{paper_version}/download"
         )
         content_disposition = response.headers["content-disposition"]
-        filename = next(re.findall("filename=(.+)", content_disposition))
+        filename = re.findall("filename=(.+)", content_disposition)[0]
 
         open(path.join(self.directory, filename), "wb").write(response.content)
