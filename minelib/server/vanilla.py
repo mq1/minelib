@@ -16,6 +16,7 @@
 
 from os import path
 import requests
+import re
 from . import server
 
 
@@ -33,7 +34,7 @@ class MinecraftServer(server.MinecraftServer):
         server = response.json()["downloads"]["server"]
 
         response = requests.get(server["url"])
-        open(
-            path.join(self.directory, f"/minecraft_server.{self.vanilla_version}.jar"),
-            "wb",
-        ).write(response.content)
+        content_disposition = response.headers["content-disposition"]
+        filename = next(re.findall("filename=(.+)", content_disposition))
+
+        open(path.join(self.directory, filename), "wb").write(response.content)

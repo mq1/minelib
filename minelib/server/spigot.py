@@ -16,6 +16,7 @@
 
 from os import path
 import requests
+import re
 from . import server
 
 
@@ -24,6 +25,7 @@ class MinecraftServer(server.MinecraftServer):
         response = requests.get(
             f"https://cdn.getbukkit.org/spigot/spigot-{self.vanilla_version}.jar"
         )
-        open(path.join(basedir, f"spigot-{self.vanilla_version}.jar"), "wb").write(
-            response.content
-        )
+        content_disposition = response.headers["content-disposition"]
+        filename = next(re.findall("filename=(.+)", content_disposition))
+
+        open(path.join(basedir, filename), "wb").write(response.content)
