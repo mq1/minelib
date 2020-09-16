@@ -22,10 +22,6 @@ from . import server
 
 class MinecraftServer(server.MinecraftServer):
     def download(self, paper_version="latest"):
-        response = requests.get(
+        return self._download_file(
             f"https://papermc.io/api/v1/paper/{self.vanilla_version}/{paper_version}/download"
         )
-        content_disposition = response.headers["content-disposition"]
-        filename = re.findall("filename=(.+)", content_disposition)[0]
-
-        open(path.join(self.directory, filename), "wb").write(response.content)

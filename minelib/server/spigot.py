@@ -21,11 +21,7 @@ from . import server
 
 
 class MinecraftServer(server.MinecraftServer):
-    def download(self, basedir):
-        response = requests.get(
+    def download(self):
+        return self._download_file(
             f"https://cdn.getbukkit.org/spigot/spigot-{self.vanilla_version}.jar"
         )
-        content_disposition = response.headers["content-disposition"]
-        filename = re.findall("filename=(.+)", content_disposition)[0]
-
-        open(path.join(basedir, filename), "wb").write(response.content)

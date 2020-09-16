@@ -33,8 +33,4 @@ class MinecraftServer(server.MinecraftServer):
         response = requests.get(version["url"])
         server = response.json()["downloads"]["server"]
 
-        response = requests.get(server["url"])
-        content_disposition = response.headers["content-disposition"]
-        filename = re.findall("filename=(.+)", content_disposition)[0]
-
-        open(path.join(self.directory, filename), "wb").write(response.content)
+        return self._download_file(server["url"])
